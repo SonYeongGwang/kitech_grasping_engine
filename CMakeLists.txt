@@ -163,9 +163,9 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
   scripts/grasp_engine.py
-  scripts/test_suber.py
-  scripts/test_puber.py
-  scripts/test_puber_state.py
+  scripts/gripper.py
+  scripts/gripper_state.py
+  scripts/vision_engine.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

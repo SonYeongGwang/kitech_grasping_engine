@@ -56,6 +56,7 @@ def gripper_state_callback(data):
 
 grasp_selected = False
 gripper_pub = rospy.Publisher('/gripper_command', Pose, queue_size=10)
+vision_start_command = rospy.Publisher('/vision_start_command', String, queue_size=1)
 rospy.Subscriber('/object_meta_info', Pose, engine_start_callback)
 rospy.Subscriber('/gripper_state', String, gripper_state_callback)
 rospy.init_node('grasp_engine', anonymous=True)
