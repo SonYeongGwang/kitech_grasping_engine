@@ -1,24 +1,26 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*- 
+
 import rospy
 from std_msgs.msg import String
 from geometry_msgs.msg import Pose
 
-def callback(data):
-    rospy.loginfo(data)
+def gripper_command_callback(data):
+    global gripper_pose, gripper_command
+    gripper_pose = data
+    gripper_command = 1
     
-def listener():
 
-    # In ROS, nodes are uniquely named. If two nodes with the same
-    # name are launched, the previous one is kicked off. The
-    # anonymous=True flag means that rospy will choose a unique
-    # name for our 'listener' node so that multiple listeners can
-    # run simultaneously.
-    rospy.init_node('listener', anonymous=True)
+rospy.Subscriber("gripper_command", Pose, gripper_command_callback)
+rospy.init_node('listener', anonymous=True)
+rate = rospy.Rate(1) # 1hz
 
-    rospy.Subscriber("gripper_command", Pose, callback)
+gripper_command = 0
 
-    # spin() simply keeps python from exiting until this node is stopped
-    rospy.spin()
+while not rospy.is_shutdown():
+    if gripper_command:
+        # 그리퍼 구동 알고리즘 작성부
+        gripper_command = 0
 
-if __name__ == '__main__':
-    listener()
+    rospy.loginfo('test printing_gripper')
+    rate.sleep()
