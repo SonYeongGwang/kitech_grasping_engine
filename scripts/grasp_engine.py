@@ -29,13 +29,13 @@ rospy.Subscriber('/finger_state', FingerState, finger_state_callback)
 rospy.Subscriber('/suction_state', SuctionState, suction_state_callback)
 rospy.init_node('grasp_engine', anonymous=True)
 rate = rospy.Rate(1) # 1hz
-grasp_selected = True
+vision_start = True
 engine_command = 0
 
 while not rospy.is_shutdown():
     op_state = 0
 
-    if grasp_selected:
+    if vision_start:
         vision_start_pub.publish(1)
 
     if engine_command:
