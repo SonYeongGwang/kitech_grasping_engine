@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/home/vision/.virtualenvs/torch_env/bin/python
 # -*- coding: utf-8 -*- 
 
 import rospy
@@ -28,7 +28,7 @@ rospy.Subscriber('/object_meta_info', MultiPoseInfo, engine_start_callback)
 rospy.Subscriber('/finger_state', FingerState, finger_state_callback)
 rospy.Subscriber('/suction_state', SuctionState, suction_state_callback)
 rospy.init_node('grasp_engine', anonymous=True)
-rate = rospy.Rate(1) # 1hz
+rate = rospy.Rate(0.2) # 1hz
 vision_start = True
 engine_command = 0
 
@@ -37,7 +37,6 @@ while not rospy.is_shutdown():
 
     if vision_start:
         vision_start_pub.publish(1)
-
     if engine_command:
         # 파지추론엔진 알고리즘 작성부
         # 파지추론엔진으로 도출된 로봇팔 및 그리퍼 제어정보를 변수에 담아두기 (로봇팔:arm_pose, 그리퍼: gripper_pose)
