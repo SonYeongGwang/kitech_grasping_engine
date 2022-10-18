@@ -1,6 +1,4 @@
-# object pose meta information
+# suction state information
 
-float32 current_stroke
-float32 goal_stroke
-float32 current_angle
-float32 goal_angle
+float32 stroke
+float32 angle

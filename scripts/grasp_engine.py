@@ -4,7 +4,8 @@
 import rospy
 from std_msgs.msg import Int16
 from geometry_msgs.msg import Pose
-from kitech_grasping_engine.msg import MultiPoseInfo, FingerState, SuctionState
+# from kitech_grasping_engine.msg import MultiPoseInfo, FingerState, SuctionState
+from kitech_grasping_engine.msg import MultiPoseInfo, GripperState
 
 def engine_start_callback(data):
     global pose_date, engine_command
@@ -12,21 +13,16 @@ def engine_start_callback(data):
     pose_date = data
     engine_command = 1
 
-def finger_state_callback(data):
-    global finger_state
-    print("finger_state", data)
-    finger_state = data
+def gripper_state_callback(data):
+    print("data:", data)
 
-def suction_state_callback(data):
-    global suction_state
-    print("suction_state", data)
-    suction_state = data
 
 gripper_pub = rospy.Publisher('/gripper_command', Pose, queue_size=10)
 vision_start_pub = rospy.Publisher('/vision_start_command', Int16, queue_size=1)
 rospy.Subscriber('/object_meta_info', MultiPoseInfo, engine_start_callback)
-rospy.Subscriber('/finger_state', FingerState, finger_state_callback)
-rospy.Subscriber('/suction_state', SuctionState, suction_state_callback)
+rospy.Subscriber('/gripper_state', GripperState, gripper_state_callback)
+# rospy.Subscriber('/finger_state', FingerState, finger_state_callback)
+# rospy.Subscriber('/suction_state', SuctionState, suction_state_callback)
 rospy.init_node('grasp_engine', anonymous=True)
 rate = rospy.Rate(0.2) # 1hz
 vision_start = True

@@ -56,6 +56,7 @@ add_message_files(
   MultiPoseInfo.msg
   SuctionState.msg
   FingerState.msg
+  GripperState.msg
 )
 
 ## Generate services in the 'srv' folder

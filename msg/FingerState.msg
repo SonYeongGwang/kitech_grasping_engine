@@ -1,6 +1,4 @@
-# object pose meta information
+# finger state information
 
-float32 current_stroke
-float32 current_torque
-float32 goal_stroke
-float32 goal_torque
+float32 stroke
+float32 torque
